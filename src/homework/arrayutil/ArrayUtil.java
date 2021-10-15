@@ -86,7 +86,38 @@ package homework.arrayutil;
 //    }
 //}
 
+// մասիվի զույգերի քանակը
 
+//public class ArrayUtil {
+//    public static void main(String[] args) {
+//        int[] array = {5, 6, 13, 22, 49, 3, 54, 77, 16, 81};
+//        int a = 0;
+//        for (int i = 0; i < array.length; i++) {
+//            if (array[i]%2==0) {
+//                a++;
+//            }
+//
+//        }
+//        System.out.println(a);
+//
+//    }
+//}
+
+// մասիվի կենտերի քանակը
+
+//public class ArrayUtil {
+//    public static void main(String[] args) {
+//        int[] array = {5, 6, 13, 22, 49, 3, 54, 77, 16, 81};
+//        int a = 0;
+//        for (int i = 0; i < array.length; i++) {
+//            if (array[i] % 2 != 0) {
+//                a++;
+//            }
+//        }
+//        System.out.println(a);
+//
+//    }
+//}
 
 
 
