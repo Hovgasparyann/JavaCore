@@ -120,6 +120,21 @@ package homework.arrayutil;
 //    }
 //}
 
+// մասիվի բոլոր թվերի միջին թվաբանականը
+
+//public class ArrayUtil{
+//    public static void main(String[] args) {
+//        int[] array = {5, 6, 13, 22, 49, 3, 54, 77, 16, 81};
+//        int a =0;
+//        int b =0;
+//        for (int i = 0; i < array.length ; i++) {
+//            a+= array[i];
+//            b= a / array.length;
+//        }
+//        System.out.println(b);
+//    }
+//}
+
 
 
 
