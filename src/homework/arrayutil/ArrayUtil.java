@@ -31,6 +31,7 @@ package homework.arrayutil;
 // }
 
 // մասիվի ամենափոքրը թիվը
+
 //public class ArrayUtil {
 //    public static void main(String[] args) {
 //        int[] array = {5, 6, 13, 22, 49, 3, 54, 77, 16, 81};
