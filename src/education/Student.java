@@ -1,4 +1,4 @@
-package homework.education;
+package education;
 
 public class Student {
 
