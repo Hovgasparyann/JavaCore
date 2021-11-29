@@ -1,4 +1,4 @@
-package education;
+package homework.education;
 
 public class StudentStorage {
 
