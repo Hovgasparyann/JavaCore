@@ -1,5 +1,10 @@
 package education;
 
+import education.model.Lesson;
+import education.model.Student;
+import education.storage.LessonStorage;
+import education.storage.StudentStorage;
+
 import java.util.Scanner;
 
 public class LessonStorageTest {

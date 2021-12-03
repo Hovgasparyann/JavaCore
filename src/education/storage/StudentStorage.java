@@ -1,4 +1,6 @@
-package education;
+package education.storage;
+
+import education.model.Student;
 
 public class StudentStorage {
 

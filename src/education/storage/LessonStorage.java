@@ -1,9 +1,11 @@
-package education;
+package education.storage;
+
+import education.model.Lesson;
 
 public class LessonStorage {
 
     private static int size;
-    static Lesson [] lessons = new Lesson[15];
+    static Lesson[] lessons = new Lesson[15];
     
 
     public static void add(Lesson lesson) {
