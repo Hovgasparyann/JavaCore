@@ -4,7 +4,10 @@ import education.model.Lesson;
 import education.model.Student;
 import education.storage.LessonStorage;
 import education.storage.StudentStorage;
+import education.util.DateUtil;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.Scanner;
 
 public class LessonStorageTest {
@@ -38,9 +41,9 @@ public class LessonStorageTest {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 
-        StudentStorage.add(new Student("Loly","Lololy",45,"lol@mail.ru",77855457,"Test"));
+        StudentStorage.add(new Student("Loly","Lololy",45,"lol@mail.ru",77855457,"Test", DateUtil.stringToDate("12/08/2001")));
         LessonStorage.add(new Lesson("Java","OOP",60,5000));
 
         boolean isRun = true;
@@ -129,7 +132,7 @@ public class LessonStorageTest {
 
     }
 
-    private static void addStudent() {
+    private static void addStudent() throws ParseException {
         System.out.println("Input Student Name");
         String name = scanner.nextLine();
         System.out.println("Input Surname");
@@ -142,9 +145,11 @@ public class LessonStorageTest {
         int phoneNumber = Integer.parseInt(scanner.nextLine());
         System.out.println("Input Lesson");
         String lesson = scanner.nextLine();
+        System.out.println("Input student birthday");
+        Date date = DateUtil.stringToDate(scanner.nextLine());
         System.out.println();
 
-        Student student = new Student(name, surname, age, email, phoneNumber, lesson);
+        Student student = new Student(name, surname, age, email, phoneNumber, lesson, date);
 
         if (StudentStorage.getByEmail(student.getEmail()) != null) {
             System.err.println("This email already exists !");
