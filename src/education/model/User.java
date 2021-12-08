@@ -1,5 +1,7 @@
 package education.model;
 
+import java.util.Locale;
+
 public class User {
 
     private String name;
@@ -95,5 +97,4 @@ public class User {
                 ", type='" + type + '\'' +
                 '}';
     }
-
 }

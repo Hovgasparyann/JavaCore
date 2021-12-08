@@ -1,5 +1,7 @@
 package education;
 
+
+
 public interface UserCommands {
 
 
@@ -8,10 +10,13 @@ public interface UserCommands {
         String REGISTER = "2";
 
 
-        static void printCommands() {
-            System.out.println("Please input " + EXIT + " for exit");
+
+    static void printCommands() {
+        System.out.println();
+            System.out.println("\033[4;36m" + "Please input " + EXIT + " for exit");
             System.out.println("Please input " + LOGIN + " for login ");
-            System.out.println("Please input " + REGISTER + " for register ");
+            System.out.println("Please input " + REGISTER + " for register " + "\u001B[0m");
+        System.out.println();
 
         }
 

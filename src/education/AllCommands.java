@@ -2,6 +2,10 @@ package education;
 
 public interface AllCommands {
 
+    String LOGIN = "1";
+    String REGISTER = "2";
+
+
 
     String EXIT = "0";
     String ADD_LESSON = "1";
@@ -13,12 +17,12 @@ public interface AllCommands {
     String DELETE_STUDENT_BY_EMAIL = "7";
 
     static void printUserCommands(){
-        System.out.println("Input " + EXIT + " For exit !");
+        System.out.println("\033[4;36m" + "Input " + EXIT + " For exit !");
         System.out.println("Input " + ADD_LESSON + " For add Lesson");
         System.out.println("Input " + ADD_STUDENT + " For add Student");
         System.out.println("Input " + PRINT_STUDENTS + " For print Student's list");
         System.out.println("Input " + PRINT_STUDENTS_BY_LESSON + " For print Students by Lesson");
-        System.out.println("Input " + PRINT_LESSONS + " For print Lesson's");
+        System.out.println("Input " + PRINT_LESSONS + " For print Lesson's" + "\033[4;32m");
     }
 
     static void printAdminCommands(){

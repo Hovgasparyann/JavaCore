@@ -50,22 +50,23 @@ public class LessonStorageTest implements AllCommands {
     }
 
     private static void login() throws ParseException {
-        System.out.println(" please input email ");
+        System.out.println("input email ");
         String email = scanner.nextLine();
-        System.out.println(" please input password ");
+        System.out.println("Input password ");
         String password = scanner.nextLine();
         String type = UserStorage.emailPassword(email, password);
         if (type != null) {
             if (type.equals("admin")) {
                 printAdminCommands();
             } else {
-                printCommands();
                 AllCommands.printUserCommands();
             }
         }
-
-
     }
+
+
+
+
 
     private static void register() throws ParseException {
         System.out.println("Input email ");
@@ -80,10 +81,13 @@ public class LessonStorageTest implements AllCommands {
             String password = scanner.nextLine();
             System.out.println("Input type ( Admin or User ) ");
             String type = scanner.nextLine();
-            User user = new User(name, surname, email, password, type);
-                UserStorage.add(user);
-                System.out.println("Thank you, Users was added");
 
+            if (type.equals("admin") || type.equals("user")) {
+                User user = new User(name, surname, email, password, type);
+                UserStorage.add(user);
+                System.out.println("Users was added");
+            } else System.out.println("invalid type !!");
+            return;
         }
 
 
