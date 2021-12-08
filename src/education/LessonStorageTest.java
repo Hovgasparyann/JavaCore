@@ -12,8 +12,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
 
-import static education.UserCommands.LOGIN;
-import static education.UserCommands.REGISTER;
+import static education.UserCommands.*;
 
 
 public class LessonStorageTest implements AllCommands {
@@ -50,26 +49,21 @@ public class LessonStorageTest implements AllCommands {
         }
     }
 
-    private static void login() {
-        System.out.println("Input email ");
+    private static void login() throws ParseException {
+        System.out.println(" please input email ");
         String email = scanner.nextLine();
-        User users = UserStorage.getByemail(email);
-        if (users == null) {
-            System.out.println("Input password ");
-            String password = scanner.nextLine();
-            System.out.println("Input name ");
-            String name = scanner.nextLine();
-            System.out.println("Input surname ");
-            String surname = scanner.nextLine();
-            System.out.println("Input type");
-            String type = scanner.nextLine();
-            if (type.equals("admin") || type.equals("user")) {
-                User user = new User(name, surname, email, password, type);
-                UserStorage.add(user);
-                System.out.println("Users was added");
-            } else System.out.println("invalid type !!");
-            return;
+        System.out.println(" please input password ");
+        String password = scanner.nextLine();
+        String type = UserStorage.emailPassword(email, password);
+        if (type != null) {
+            if (type.equals("admin")) {
+                printAdminCommands();
+            } else {
+                printCommands();
+                AllCommands.printUserCommands();
+            }
         }
+
 
     }
 
@@ -84,7 +78,7 @@ public class LessonStorageTest implements AllCommands {
             String surname = scanner.nextLine();
             System.out.println("Input password ");
             String password = scanner.nextLine();
-            System.out.println("Input type ");
+            System.out.println("Input type ( admin & user ) ");
             String type = scanner.nextLine();
             if (type.equals("admin") || type.equals("user")) {
                 User user = new User(name, surname, email, password, type);
