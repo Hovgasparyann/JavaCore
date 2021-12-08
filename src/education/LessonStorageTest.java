@@ -78,14 +78,12 @@ public class LessonStorageTest implements AllCommands {
             String surname = scanner.nextLine();
             System.out.println("Input password ");
             String password = scanner.nextLine();
-            System.out.println("Input type ( admin & user ) ");
+            System.out.println("Input type ( Admin or User ) ");
             String type = scanner.nextLine();
-            if (type.equals("admin") || type.equals("user")) {
-                User user = new User(name, surname, email, password, type);
+            User user = new User(name, surname, email, password, type);
                 UserStorage.add(user);
                 System.out.println("Thank you, Users was added");
-            } else System.out.println("invalid type !!");
-            return;
+
         }
 
 
