@@ -59,7 +59,8 @@ public class LessonStorageTest implements AllCommands {
             if (type.equals("admin")) {
                 printAdminCommands();
             } else {
-                AllCommands.printUserCommands();
+                System.out.println("error");
+
             }
         }
     }
@@ -86,9 +87,10 @@ public class LessonStorageTest implements AllCommands {
                 User user = new User(name, surname, email, password, type);
                 UserStorage.add(user);
                 System.out.println("Users was added");
-            } else System.out.println("invalid type !!");
+                System.out.println();
+            } else System.out.println("invalid Type !!");
             return;
-        }
+        }else System.out.println("Invalid Email");
 
 
 
