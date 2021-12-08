@@ -59,7 +59,7 @@ public class LessonStorageTest implements AllCommands {
             if (type.equals("admin")) {
                 printAdminCommands();
             } else {
-                System.out.println("error");
+                AllCommands.printUserCommands();
 
             }
         }
