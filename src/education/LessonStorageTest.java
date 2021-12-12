@@ -22,9 +22,13 @@ public class LessonStorageTest implements AllCommands {
     static UserStorage us = new UserStorage();
 
 
-    public static void main(String[] args) throws ParseException, UserNotFoundException {
+    public static void main(String[] args) throws  UserNotFoundException {
 
-        StudentStorage.add(new Student("Loly", "Lololy", 45, "lol@mail.ru", 77855457, "Test", DateUtil.stringToDate("12/08/2001")));
+        try {
+            StudentStorage.add(new Student("Loly", "Lololy", 45, "lol@mail.ru", 77855457, "Test", DateUtil.stringToDate("12/08/2001")));
+        } catch (ParseException e) {
+            System.out.println("Invalid Date format!");
+        }
         LessonStorage.add(new Lesson("Java", "OOP", 60, 5000));
 
 
