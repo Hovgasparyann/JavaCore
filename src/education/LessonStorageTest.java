@@ -48,7 +48,7 @@ public class LessonStorageTest implements AllCommands {
         }
     }
 
-    private static void login() throws ParseException {
+    private static void login()   {
         System.out.println("input email ");
         String email = scanner.nextLine();
         System.out.println("Input password ");
