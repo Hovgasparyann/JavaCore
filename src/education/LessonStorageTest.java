@@ -1,5 +1,6 @@
 package education;
 
+import education.exception.UserNotFoundException;
 import education.model.Lesson;
 import education.model.Student;
 import education.model.User;
@@ -21,7 +22,7 @@ public class LessonStorageTest implements AllCommands {
     static UserStorage us = new UserStorage();
 
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws ParseException, UserNotFoundException {
 
         StudentStorage.add(new Student("Loly", "Lololy", 45, "lol@mail.ru", 77855457, "Test", DateUtil.stringToDate("12/08/2001")));
         LessonStorage.add(new Lesson("Java", "OOP", 60, 5000));
@@ -52,7 +53,12 @@ public class LessonStorageTest implements AllCommands {
         String email = scanner.nextLine();
         System.out.println("Input password ");
         String password = scanner.nextLine();
-        String type = UserStorage.emailPassword(email, password);
+        String type = null;
+        try {
+            type = UserStorage.GetByEmailOrPassword(email, password);
+        } catch (UserNotFoundException e) {
+            System.err.println(e.getMessage());
+        }
         if (type != null) {
             if (type.equals("admin")) {
                 printAdminCommands();
@@ -64,10 +70,10 @@ public class LessonStorageTest implements AllCommands {
     }
 
 
-    private static void register() throws ParseException {
+    private static void register() throws UserNotFoundException  {
         System.out.println("Input email ");
         String email = scanner.nextLine();
-        User users = UserStorage.getByemail(email);
+        User users = UserStorage.getByEmail(email);
         if (users == null) {
             System.out.println("Input name ");
             String name = scanner.nextLine();
@@ -81,14 +87,15 @@ public class LessonStorageTest implements AllCommands {
             if (type.equalsIgnoreCase("Admin") || type.equalsIgnoreCase("User")) {
                 User user = new User(name, surname, email, password, type);
                 UserStorage.add(user);
-                System.out.println("Users was added");
+                System.out.println("User was added");
                 System.out.println();
             } else System.out.println("invalid Type !!");
+        }
 
-        } else System.err.println("Invalid Email, try another Email !");
+
     }
 
-    private static void printUserCommands() throws ParseException {
+    private static void printUserCommands() {
         boolean isRun = true;
         while (isRun) {
             AllCommands.printUserCommands();
@@ -122,7 +129,7 @@ public class LessonStorageTest implements AllCommands {
         }
     }
 
-    private static void printAdminCommands() throws ParseException {
+    private static void printAdminCommands() {
         boolean isRun = true;
         while (isRun) {
             AllCommands.printAdminCommands();
@@ -216,7 +223,7 @@ public class LessonStorageTest implements AllCommands {
 
     }
 
-    private static void addStudent() throws ParseException {
+    private static void addStudent() {
         System.out.println("Input Student Name");
         String name = scanner.nextLine();
         System.out.println("Input Surname");
@@ -230,7 +237,12 @@ public class LessonStorageTest implements AllCommands {
         System.out.println("Input Lesson");
         String lesson = scanner.nextLine();
         System.out.println("Input student birthday");
-        Date date = DateUtil.stringToDate(scanner.nextLine());
+        Date date = null;
+        try {
+            date = DateUtil.stringToDate(scanner.nextLine());
+        } catch (ParseException e) {
+            System.out.println("Invalid Date Format !");
+        }
         System.out.println();
 
         Student student = new Student(name, surname, age, email, phoneNumber, lesson, date);
