@@ -14,7 +14,7 @@ public class UserStorage {
                 return users[i];
             }
         }
-        return null;
+        throw new UserNotFoundException("Email error");
     }
 
 

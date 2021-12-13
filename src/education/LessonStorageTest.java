@@ -22,7 +22,7 @@ public class LessonStorageTest implements AllCommands {
     static UserStorage us = new UserStorage();
 
 
-    public static void main(String[] args) throws  UserNotFoundException {
+    public static void main(String[] args) throws UserNotFoundException {
 
         try {
             StudentStorage.add(new Student("Loly", "Lololy", 45, "lol@mail.ru", 77855457, "Test", DateUtil.stringToDate("12/08/2001")));
@@ -52,8 +52,8 @@ public class LessonStorageTest implements AllCommands {
         }
     }
 
-    private static void login()   {
-        System.out.println("input email ");
+    private static void login() {
+        System.out.println("Input email ");
         String email = scanner.nextLine();
         System.out.println("Input password ");
         String password = scanner.nextLine();
@@ -74,11 +74,16 @@ public class LessonStorageTest implements AllCommands {
     }
 
 
-    private static void register() throws UserNotFoundException  {
+    private static void register() {
         System.out.println("Input email ");
         String email = scanner.nextLine();
-        User users = UserStorage.getByEmail(email);
-        if (users == null) {
+
+        try {
+            UserStorage.getByEmail(email);
+            System.err.println("This email is already in use! Try another email !");
+
+        } catch (UserNotFoundException e) {
+
             System.out.println("Input name ");
             String name = scanner.nextLine();
             System.out.println("Input surname ");
@@ -87,17 +92,18 @@ public class LessonStorageTest implements AllCommands {
             String password = scanner.nextLine();
             System.out.println("Input type ( Admin or User ) ");
             String type = scanner.nextLine();
-
             if (type.equalsIgnoreCase("Admin") || type.equalsIgnoreCase("User")) {
                 User user = new User(name, surname, email, password, type);
                 UserStorage.add(user);
                 System.out.println("User was added");
                 System.out.println();
             } else System.out.println("invalid Type !!");
+
         }
 
 
     }
+
 
     private static void printUserCommands() {
         boolean isRun = true;
