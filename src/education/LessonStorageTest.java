@@ -4,6 +4,7 @@ import education.exception.UserNotFoundException;
 import education.model.Lesson;
 import education.model.Student;
 import education.model.User;
+import education.model.UserType;
 import education.storage.LessonStorage;
 import education.storage.StudentStorage;
 import education.storage.UserStorage;
@@ -28,7 +29,7 @@ public class LessonStorageTest implements AllCommands {
 
         try {
             StudentStorage.add(new Student("Loly", "Lololy", 45, "lol@mail.ru", 77855457, "Test", DateUtil.stringToDate("12/08/2001")));
-            UserStorage.add(new User("as", "as", "as", "as", "Admin"));
+            UserStorage.add(new User("as", "as", "as", "as", UserType.USER));
         } catch (ParseException e) {
             System.out.println("Invalid Date format!");
         }
@@ -64,7 +65,7 @@ public class LessonStorageTest implements AllCommands {
         try {
             user = UserStorage.GetByEmailOrPassword(email, password);
             if (user != null) {
-                if (user.getType().toLowerCase(Locale.ROOT).equals("admin")) {
+                if (user.getType() == UserType.ADMIN) {
                     printAdminCommands();
                 } else {
                     printUserCommands();
@@ -109,7 +110,7 @@ public class LessonStorageTest implements AllCommands {
             System.out.println("Input type ( Admin or User ) ");
             String type = scanner.nextLine();
             if (type.equalsIgnoreCase("Admin") || type.equalsIgnoreCase("User")) {
-                User user = new User(name, surname, email, password, type);
+                User user = new User(name, surname, email, password, UserType.valueOf(type.toUpperCase(Locale.ROOT)));
                 UserStorage.add(user);
                 System.out.println("User was added");
                 System.out.println();
