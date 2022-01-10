@@ -11,6 +11,8 @@ import education.util.DateUtil;
 
 import java.text.ParseException;
 import java.util.Date;
+
+import java.util.Locale;
 import java.util.Scanner;
 
 
@@ -26,6 +28,7 @@ public class LessonStorageTest implements AllCommands {
 
         try {
             StudentStorage.add(new Student("Loly", "Lololy", 45, "lol@mail.ru", 77855457, "Test", DateUtil.stringToDate("12/08/2001")));
+            UserStorage.add(new User("as", "as", "as", "as", "Admin"));
         } catch (ParseException e) {
             System.out.println("Invalid Date format!");
         }
@@ -52,37 +55,50 @@ public class LessonStorageTest implements AllCommands {
         }
     }
 
-    private static void login() {
+    private static void login() throws UserNotFoundException {
         System.out.println("Input email ");
         String email = scanner.nextLine();
-        System.out.println("Input password ");
+        System.out.println("Input password");
         String password = scanner.nextLine();
-        String type = null;
+        User user = null;
         try {
-            type = UserStorage.GetByEmailOrPassword(email, password);
+            user = UserStorage.GetByEmailOrPassword(email, password);
+            if (user != null) {
+                if (user.getType().toLowerCase(Locale.ROOT).equals("admin")) {
+                    printAdminCommands();
+                } else {
+                    printUserCommands();
+                }
+            } else {
+                System.err.println("Not Found");
+            }
         } catch (UserNotFoundException e) {
             System.err.println(e.getMessage());
         }
-        if (type != null) {
-            if (type.equals("admin")) {
-                printAdminCommands();
-            } else {
-                printUserCommands();
+    }
 
+    private static String showEmail() {
+        try {
+            System.out.println("Input email ");
+            String email = scanner.nextLine();
+
+            if (UserStorage.getByEmail(email) != null) {
+                System.err.println("This email is already in use! Try another email !");
+                showEmail();
+            } else {
+                return email;
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
+
+        return null;
     }
 
 
     private static void register() {
-        System.out.println("Input email ");
-        String email = scanner.nextLine();
-
         try {
-            UserStorage.getByEmail(email);
-            System.err.println("This email is already in use! Try another email !");
-
-        } catch (UserNotFoundException e) {
+            String email = showEmail();
 
             System.out.println("Input name ");
             String name = scanner.nextLine();
@@ -98,7 +114,8 @@ public class LessonStorageTest implements AllCommands {
                 System.out.println("User was added");
                 System.out.println();
             } else System.out.println("invalid Type !!");
-
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
 
 
@@ -191,7 +208,7 @@ public class LessonStorageTest implements AllCommands {
             StudentStorage.deleteStudentByEmail(student);
             System.out.println("Student Deleted");
         } else {
-            System.err.println("Error");
+            System.err.println("Student is not found");
         }
 
 

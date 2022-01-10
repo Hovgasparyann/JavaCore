@@ -1,6 +1,5 @@
 package education.model;
 
-import java.util.Locale;
 
 public class User {
 

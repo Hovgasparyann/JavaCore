@@ -2,53 +2,37 @@ package education.storage;
 
 import education.model.Lesson;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class LessonStorage {
 
-    private static int size;
-    static Lesson[] lessons = new Lesson[15];
-    
+
+    static List<Lesson> lessons = new LinkedList<>();
+
 
     public static void add(Lesson lesson) {
-        if (lessons.length == size) {
-            extend();
-        }
-        lessons[size++] = lesson;
+        lessons.add(lesson);
     }
 
-    private static void extend() {
-        Lesson[] tmp = new Lesson[lessons.length + 10];
-        System.arraycopy(lessons, 0, tmp, 0, lessons.length);
-        lessons = tmp;
-    }
 
-    public static void print(){
-        for (int i = 0; i < size; i++) {
-            System.out.println(lessons[i]);
+    public static void print() {
+        for (Lesson lesson : lessons) {
+            System.out.println(lesson);
         }
     }
 
-    public Lesson getByLessonName (String lessonName){
-
-        for (int i = 0; i < size; i++) {
-            if (lessons[i].getLesson().equals(lessonName)){
-                return lessons[i];
+    public Lesson getByLessonName(String lessonName) {
+        for (Lesson lesson : lessons) {
+            if (lesson.getLectureName().equals(lessonName)) {
+                return lesson;
             }
 
         }
-        return  null;
-
+        return null;
     }
-
 
     public void deleteLessonByName(Lesson lesson) {
-        for (int i = 0; i < size; i++) {
-            if (lessons[i].getLesson().equals(lesson)) {
-                for (int j = i + 1; j < size; j++) {
-                    lessons[j - 1] = lessons[j];
-                }
-            }
-        }
-        size--;
+        lessons.remove(lesson);
     }
-
 }

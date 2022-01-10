@@ -1,48 +1,43 @@
 package education.storage;
 
 import education.model.Student;
+import org.omg.CosNaming.NamingContextPackage.NotFound;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudentStorage {
 
 
-    private static int size;
-    private static Student[] students = new Student[15];
-
+    private static List<Student> students = new ArrayList<>();
 
 
     public static void add(Student student) {
-        if (size == students.length) {
-            extend();
-        }
-        students[size++] = student;
-    }
-
-    private static void extend() {
-        Student[] tmp = new Student[students.length + 10];
-        System.arraycopy(students, 0, tmp, 0, size);
-        students = tmp;
-
+        students.add(student);
     }
 
     public static void print() {
-        for (int i = 0; i < size; i++) {
-            System.out.println(students[i]);
+        for (Student student : students) {
+            System.out.println(student);
         }
     }
 
     public static Student getByEmail(String email) {
-        for (int i = 0; i < size; i++) {
-            if (students[i].getEmail().equals(email)) {
-                return students[i];
+        for (Student student : students) {
+            if (student.getEmail().equals(email)) {
+                System.out.println(student);
+                return student;
             }
         }
         return null;
     }
 
     public static Student getByLesson(String lesson) {
-        for (int i = 0; i < size; i++) {
-            if (students[i].getLesson().equals(lesson)) {
-                System.out.println(students[i]);
+        for (Student student : students) {
+            if (student.getLesson().equals(lesson)) {
+                System.out.println(student);
+                return student;
             }
         }
         return null;
@@ -50,13 +45,15 @@ public class StudentStorage {
 
 
     public static void deleteStudentByEmail(Student student) {
-        for (int i = 0; i < size; i++) {
-            if (students[i].getEmail().equals(student)) {
-                for (int j = i + 1; j < size; j++) {
-                    students[j - 1] = students[j];
+        try {
+            for (Student student1 : students) {
+
+                if (student.equals(student1)) {
+                    students.remove(student1);
                 }
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-        size--;
     }
 }
