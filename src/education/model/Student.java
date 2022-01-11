@@ -2,10 +2,11 @@ package education.model;
 
 import homework.author.util.DateUtil;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class Student {
+public class Student implements Serializable {
 
     private String name;
     private String surname;

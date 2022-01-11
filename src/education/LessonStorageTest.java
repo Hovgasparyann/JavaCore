@@ -12,7 +12,6 @@ import education.util.DateUtil;
 
 import java.text.ParseException;
 import java.util.Date;
-
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -26,14 +25,6 @@ public class LessonStorageTest implements AllCommands {
 
 
     public static void main(String[] args) throws UserNotFoundException {
-
-        try {
-            StudentStorage.add(new Student("Loly", "Lololy", 45, "lol@mail.ru", 77855457, "Test", DateUtil.stringToDate("12/08/2001")));
-            UserStorage.add(new User("as", "as", "as", "as", UserType.USER));
-        } catch (ParseException e) {
-            System.out.println("Invalid Date format!");
-        }
-        LessonStorage.add(new Lesson("Java", "OOP", 60, 5000));
 
 
         boolean b = true;
@@ -197,6 +188,12 @@ public class LessonStorageTest implements AllCommands {
 
         }
 
+    }
+
+    private static void initData(){
+        StudentStorage.initData();
+        LessonStorage.initData();
+        UserStorage.initData();
     }
 
 

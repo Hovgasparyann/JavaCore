@@ -1,8 +1,7 @@
 package education.storage;
 
 import education.model.Student;
-import org.omg.CosNaming.NamingContextPackage.NotFound;
-
+import education.util.FileUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,9 @@ public class StudentStorage {
 
     public static void add(Student student) {
         students.add(student);
+        FileUtil.serializeStudents(students);
     }
+
 
     public static void print() {
         for (Student student : students) {
@@ -54,6 +55,14 @@ public class StudentStorage {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+        FileUtil.serializeStudents(students);
+    }
+
+    public static void initData() {
+        List<Student> studentList = FileUtil.deserializeStudents();
+        if (studentList != null) {
+            students = studentList;
         }
     }
 }

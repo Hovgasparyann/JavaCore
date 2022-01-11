@@ -2,9 +2,9 @@ package education.storage;
 
 import education.exception.UserNotFoundException;
 import education.model.User;
+import education.util.FileUtil;
 
 import java.util.HashMap;
-
 import java.util.Map;
 
 public class UserStorage {
@@ -19,6 +19,7 @@ public class UserStorage {
 
     public static void add(User user) {
         userMap.put(user.getEmail(), user);
+        FileUtil.serializeUserMap(userMap);
     }
 
 
@@ -33,9 +34,15 @@ public class UserStorage {
             } else {
                 return null;
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return null;
+        }
+    }
+
+    public static void initData() {
+        Map<String, User> userMapFromFile = FileUtil.deserializeUserMap();
+        if (userMapFromFile != null) {
+            userMap = userMapFromFile;
         }
     }
 

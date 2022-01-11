@@ -1,6 +1,8 @@
 package education.model;
 
-public class Lesson {
+import java.io.Serializable;
+
+public class Lesson implements Serializable {
 
     private String lesson;
     private String lectureName;
